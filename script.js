@@ -1,18 +1,83 @@
+let keyCode = ["Backquote",
+    "Digit1",
+    "Digit2",
+    "Digit3",
+    "Digit4",
+    "Digit5",
+    "Digit6",
+    "Digit7",
+    "Digit8",
+    "Digit9",
+    "Digit0",
+    "Minus",
+    "Equal",
+    "Backspace",
+    "Tab",
+    "KeyQ",
+    "KeyW",
+    "KeyE",
+    "KeyR",
+    "KeyT",
+    "KeyY",
+    "KeyU",
+    "KeyI",
+    "KeyO",
+    "KeyP",
+    "BracketLeft",
+    "BracketRight",
+    "Backslash",
+    "Delete",
+    "CapsLock",
+    "KeyA",
+    "KeyS",
+    "KeyD",
+    "KeyF",
+    "KeyG",
+    "KeyH",
+    "KeyJ",
+    "KeyK",
+    "KeyL",
+    "Semicolon",
+    "Quote",
+    "Enter",
+    "ShiftLeft",
+    "Backslash",
+    "KeyZ",
+    "KeyX",
+    "KeyC",
+    "KeyV",
+    "KeyB",
+    "KeyN",
+    "KeyM",
+    "Comma",
+    "Period",
+    "Slash",
+    "ArrowUp",
+    "ShiftRight",
+    "ControlLeft",
+    "MetaLeft",
+    "AltLeft",
+    "Space",
+    "AltRight",
+    "ControlRight",
+    "ArrowLeft",
+    "ArrowDown",
+    "ArrowRight"];
 
 let keysRu = [
     'ё',
-    ['!',1],
-    ['"',2],
-    ['№',3],
-    [';',4],
-    ['%',5],
-    ['^',6],
-    ['&',7],
-    ['*',8],
-    ['(',9],
-    [')',0],
-    ['_','-'],
-    ['+','='],
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    0,
+    '-',
+    '=',
     'Backspace',
     'Tab',
     'й',
@@ -27,7 +92,7 @@ let keysRu = [
     'з',
     'х',
     'ъ',
-    ['/','\\'],
+    '\\',
     'del',
     'Caps Lock',
     'ф',
@@ -66,21 +131,88 @@ let keysRu = [
     '↓',
     '→',
 ];
+let keysRuCaps = [
+    'Ё',
+    '!',
+    '"',
+    '№',
+    ';',
+    '%',
+    '^',
+    '&',
+    '*',
+    '(',
+    ')',
+    '_',
+    '+',
+    'Backspace',
+    'Tab',
+    'Й',
+    'Ц',
+    'У',
+    'К',
+    'Е',
+    'Н',
+    'Г',
+    'Ш',
+    'Щ',
+    'З',
+    'Х',
+    'Ъ',
+    '/',
+    'del',
+    'Caps Lock',
+    'Ф',
+    'Ы',
+    'В',
+    'А',
+    'П',
+    'Р',
+    'О',
+    'Л',
+    'Д',
+    'Ж',
+    'Э',
+    'ENTER',
+    'Shift',
+    '\\',
+    'Я',
+    'Ч',
+    'С',
+    'М',
+    'И',
+    'Т',
+    'Ь',
+    'Б',
+    'Ю',
+    '/',
+    '↑',
+    'Shift',
+    'Ctrl',
+    'Win',
+    'Alt',
+    ' ',
+    'Alt',
+    'Ctrl',
+    '←',
+    '↓',
+    '→',
+];
 
 const keysEn = [
-    ['~','`'],
-    ['!',1],
-    ['@',2],
-    ['#',3],
-    ['$',4],
-    ['%',5],
-    [':',6],
-    ['?',7],
-    ['*',8],
-    ['(',9],
-    [')',0],
-    ['_','-'],
-    ['+','='],
+    '`',
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    0,
+    '-',
+    '=',
     'Backspace',
     'Tab',
     'q',
@@ -95,7 +227,7 @@ const keysEn = [
     'p',
     '[',
     ']',
-    ['/','\\'],
+    '\\',
     'del',
     'Caps Lock',
     'a',
@@ -135,12 +267,102 @@ const keysEn = [
     '→',
 
 ];
+const keysEnCaps = [
+    '~',
+    '!',
+    '@',
+    '#',
+    '$',
+    '%',
+    ':',
+    '?',
+    '*',
+    '(',
+    ')',
+    '_',
+    '+',
+    'Backspace',
+    'Tab',
+    'Q',
+    'W',
+    'E',
+    'R',
+    'T',
+    'Y',
+    'U',
+    'I',
+    'O',
+    'P',
+    '[',
+    ']',
+    '/',
+    'del',
+    'Caps Lock',
+    'A',
+    'S',
+    'D',
+    'F',
+    'G',
+    'H',
+    'J',
+    'K',
+    'L',
+    ';',
+    '\'',
+    'ENTER',
+    'Shift',
+    '\\',
+    'Z',
+    'X',
+    'C',
+    'V',
+    'B',
+    'N',
+    'M',
+    '.',
+    ',',
+    '/',
+    '↑',
+    'Shift',
+    'Ctrl',
+    'Win',
+    'Alt',
+    ' ',
+    'Alt',
+    'Ctrl',
+    '←',
+    '↓',
+    '→',
 
-const INPUT = document.createElement('input');
+];
+let language = 'Ru';
+
+
+language = localStorage.getItem('language');
+
+
+document.body.onload = () =>{
+   if (language === 'Ru'){keyBord(keysRu);}else{keyBord(keysEn)}
+};
+
+
+function LanguageCaps() {
+    if(language === 'Ru'){keyBord(keysRuCaps)}else{keyBord(keysEnCaps)}
+}
+function Language() {
+    if(language === 'Ru'){keyBord(keysRu)}else{keyBord(keysEn)}
+}
+const INPUT = document.createElement('textarea');
 const MAIN = document.createElement('div');
-let count = 0;
-
+let active = [];
 function keyBord(Lang) {
+    MAIN.querySelectorAll('div').forEach( (e,i) =>{
+        if (e.classList[1] === "active"){
+            active.push(i)
+        }
+        e.remove();
+
+    });
 
     MAIN.className = 'main';
     INPUT.className = 'input';
@@ -148,20 +370,22 @@ function keyBord(Lang) {
     document.body.append(MAIN);
 
     Lang.forEach((e,i) => {
+
         let button = document.createElement('div');
         let keyText = document.createElement('p');
-        let little = document.createElement('p');
-        if(typeof e !== "object"){
-            keyText.className = 'txt';
-            keyText.innerText = `${e}`;
-        }else{
-            keyText.className = 'txt';
-            keyText.innerText = `${e[1]}`;
-            little.className = 'little';
-            little.innerText = `${e[0]}`;
-            button.append(little)
-        }
+         let little = document.createElement('p');
+
+         keyText.className = 'txt';
+         keyText.innerText = `${e}`;
+
+
+
         button.className = 'buttons';
+        if(active.indexOf(i) !== -1){
+            button.classList.add('active')
+        }
+        button.setAttribute( 'data-code',`${keyCode[i]}`);
+
         switch (e) {
             case 'Backspace':
                 button.style.width = '75px';
@@ -188,6 +412,8 @@ function keyBord(Lang) {
         MAIN.append(button);
 
     })
+    active = []
+
 
 
 
@@ -196,49 +422,44 @@ function keyBord(Lang) {
 };
 
 MAIN.addEventListener('click',event => {
-    INPUT.value += event.target.lastChild.textContent
-})
-document.body.onload = keyBord(keysRu);
-button(
+    INPUT.value += event.target.textContent
+});
+
+buttons(
     () => {
-        if(MAIN.querySelectorAll('div')[0].textContent === 'ё'){
-            MAIN.querySelectorAll('div').forEach( e =>{
-                e.remove();
-            });
+
+
+        LanguageCaps()
+    },
+    "ShiftLeft",
+
+);
+
+buttons(
+    () => {
+        if(language === 'Ru'){
+            language = 'En'
             keyBord(keysEn)
-        }else if(MAIN.querySelectorAll('div')[0].textContent ==="~`"){
-            MAIN.querySelectorAll('div').forEach( e =>{
-                e.remove();
-            });
+        }else if(language === 'En'){
+            language = "Ru"
             keyBord(keysRu)
         }
-
-
-
-
-
+        localStorage.setItem('language', language);
     },
-    "ShiftLeft",
-    'AltLeft'
+    "ControlLeft",
+    "AltLeft"
 );
-button(
-    () => {
-
-
-
-
-
-
-
-    },
-    "ShiftLeft",
-);
-function button(func, ...codes) {
+function buttons(func, ...codes) {
     let pressed = new Set();
 
     document.addEventListener('keydown', function(event) {
-        console.log(event.code)
+        console.log(event.code);
         pressed.add(event.code);
+        MAIN.querySelectorAll('div').forEach(e =>{
+            if(event.code === e.attributes["data-code"].value){
+                e.classList.add('active')
+            }
+        });
 
         for (let code of codes) {
             if (!pressed.has(code)) {
@@ -252,7 +473,17 @@ function button(func, ...codes) {
     });
 
     document.addEventListener('keyup', function(event) {
+
+        if(pressed.has("ShiftLeft")){console.log(pressed.has("ShiftLeft")) }else{
+            console.log(pressed.has("ShiftLeft"))
+            if(language === 'Ru'){keyBord(keysRu)}else{keyBord(keysEn)} }
         pressed.delete(event.code);
+
+        MAIN.querySelectorAll('div').forEach(e =>{
+            if(event.code == e.attributes["data-code"].value){
+                e.classList.remove('active')
+            }
+        });
     });
 
 }

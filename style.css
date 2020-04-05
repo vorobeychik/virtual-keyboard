@@ -13,6 +13,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  color:white;
 
 
 }
@@ -25,6 +26,15 @@
   align-items: center;
   justify-content: center;
 
+}
+.active{
+  width: 35px;
+  height: 35px;
+  background-color: red;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .little{
   font-size: 10px;
