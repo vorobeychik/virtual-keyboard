@@ -26,7 +26,6 @@ let keyCode = ["Backquote",
     "BracketLeft",
     "BracketRight",
     "Backslash",
-    "Delete",
     "CapsLock",
     "KeyA",
     "KeyS",
@@ -63,7 +62,6 @@ let keyCode = ["Backquote",
     "ArrowLeft",
     "ArrowDown",
     "ArrowRight"];
-
 let keysRu = [
     'ё',
     1,
@@ -93,7 +91,6 @@ let keysRu = [
     'х',
     'ъ',
     '\\',
-    'del',
     'Caps Lock',
     'ф',
     'ы',
@@ -160,7 +157,6 @@ let keysRuCaps = [
     'Х',
     'Ъ',
     '/',
-    'del',
     'Caps Lock',
     'Ф',
     'Ы',
@@ -198,7 +194,6 @@ let keysRuCaps = [
     '↓',
     '→',
 ];
-
 const keysEn = [
     '`',
     1,
@@ -228,7 +223,6 @@ const keysEn = [
     '[',
     ']',
     '\\',
-    'del',
     'Caps Lock',
     'a',
     's',
@@ -296,7 +290,6 @@ const keysEnCaps = [
     '[',
     ']',
     '/',
-    'del',
     'Caps Lock',
     'A',
     'S',
@@ -343,14 +336,12 @@ language = localStorage.getItem('language');
 
 document.body.onload = () =>{
    if (language === 'Ru'){keyBord(keysRu);}else{keyBord(keysEn)}
+   alert('Смена языка Ctrl + alt')
 };
 
 
 function LanguageCaps() {
     if(language === 'Ru'){keyBord(keysRuCaps)}else{keyBord(keysEnCaps)}
-}
-function Language() {
-    if(language === 'Ru'){keyBord(keysRu)}else{keyBord(keysEn)}
 }
 const INPUT = document.createElement('textarea');
 const MAIN = document.createElement('div');
@@ -366,27 +357,29 @@ function keyBord(Lang) {
 
     MAIN.className = 'main';
     INPUT.className = 'input';
+
     document.body.append(INPUT);
     document.body.append(MAIN);
 
     Lang.forEach((e,i) => {
 
         let button = document.createElement('div');
-        let keyText = document.createElement('p');
-         let little = document.createElement('p');
+        button.className = 'buttons';
+
+         let keyText = document.createElement('text');
 
          keyText.className = 'txt';
-         keyText.innerText = `${e}`;
+         button.innerText = `${e}`;
 
-
-
-        button.className = 'buttons';
         if(active.indexOf(i) !== -1){
             button.classList.add('active')
         }
         button.setAttribute( 'data-code',`${keyCode[i]}`);
 
         switch (e) {
+            case 'Tab':
+                button.style.width = '75px';
+                break;
             case 'Backspace':
                 button.style.width = '75px';
                 break;
@@ -397,7 +390,7 @@ function keyBord(Lang) {
                 button.style.width = '70px';
                 break;
             case 'Shift':
-                if(i === 42){
+                if(i === 41){
                     button.style.width = '75px'
                 }
                 break;
@@ -408,40 +401,20 @@ function keyBord(Lang) {
                 button.style.width = '50px';
                 break;
         }
-        button.append(keyText);
+
         MAIN.append(button);
 
-    })
+    });
     active = []
-
-
-
-
-
-
-};
-
-MAIN.addEventListener('click',event => {
-    INPUT.value += event.target.textContent
-});
-
-buttons(
-    () => {
-
-
-        LanguageCaps()
-    },
-    "ShiftLeft",
-
-);
+}
 
 buttons(
     () => {
         if(language === 'Ru'){
-            language = 'En'
+            language = 'En';
             keyBord(keysEn)
         }else if(language === 'En'){
-            language = "Ru"
+            language = "Ru";
             keyBord(keysRu)
         }
         localStorage.setItem('language', language);
@@ -453,19 +426,15 @@ function buttons(func, ...codes) {
     let pressed = new Set();
 
     document.addEventListener('keydown', function(event) {
-        console.log(event.code);
+        console.log(event.code)
         pressed.add(event.code);
-        MAIN.querySelectorAll('div').forEach(e =>{
-            if(event.code === e.attributes["data-code"].value){
-                e.classList.add('active')
-            }
-        });
 
         for (let code of codes) {
             if (!pressed.has(code)) {
                 return;
             }
         }
+
         pressed.clear();
 
         func();
@@ -474,16 +443,69 @@ function buttons(func, ...codes) {
 
     document.addEventListener('keyup', function(event) {
 
-        if(pressed.has("ShiftLeft")){console.log(pressed.has("ShiftLeft")) }else{
-            console.log(pressed.has("ShiftLeft"))
-            if(language === 'Ru'){keyBord(keysRu)}else{keyBord(keysEn)} }
-        pressed.delete(event.code);
 
         MAIN.querySelectorAll('div').forEach(e =>{
-            if(event.code == e.attributes["data-code"].value){
+            if(event.code === e.attributes["data-code"].value){
                 e.classList.remove('active')
             }
         });
     });
 
 }
+let listener = function (event) {
+    console.log(event.code)
+
+    if(event.code === "Backspace"){
+        INPUT.value = INPUT.value.slice(0,INPUT.value.length - 1)
+    }
+    MAIN.querySelectorAll('div').forEach(e =>{
+        if(event.code === e.attributes["data-code"].value){
+            e.classList.add('active')
+            if(e.textContent.length  <2){INPUT.value += e.textContent}
+        }
+    });};
+document.addEventListener('keydown',(event) =>{
+    if(event.code === "ShiftLeft"){
+        LanguageCaps()
+    }
+    if(event.code === "Tab"){
+        INPUT.value += '  '
+    }
+    MAIN.querySelectorAll('div').forEach(e =>{
+        if(event.code === e.attributes["data-code"].value){
+            e.classList.add('active')
+        }
+    })
+});
+document.addEventListener('keydown',listener);
+document.addEventListener('keyup', function (event) {
+    if(event.code === "ShiftLeft"){
+        if(language === 'Ru'){keyBord(keysRu)}else{keyBord(keysEn)}
+    }
+});
+INPUT.onfocus = () => {
+    document.removeEventListener('keydown', listener)
+
+}
+INPUT.onblur = () => {
+    console.log(2)
+    document.addEventListener('keydown',listener);
+}
+MAIN.addEventListener("mouseover", event => {
+    if(event.target.classList[0] !== 'main'){
+        event.target.classList.add('active')
+    }
+    })
+MAIN.addEventListener("mouseout", event => {
+    if(event.target.classList[0] !== 'main'){
+        event.target.classList.remove('active')
+    }
+})
+MAIN.addEventListener("click", event => {
+    MAIN.querySelectorAll('div').forEach(e =>{
+        if(event.target.attributes["data-code"].value === e.attributes["data-code"].value){
+            if(e.textContent.length  <2){INPUT.value += e.textContent}
+
+        }
+    });
+})
