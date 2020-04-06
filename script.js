@@ -329,9 +329,8 @@ const keysEnCaps = [
 
 ];
 let language = 'Ru';
-
-
-language = localStorage.getItem('language');
+if(localStorage.getItem('language') !== null){
+language = localStorage.getItem('language');}
 
 
 document.body.onload = () =>{
