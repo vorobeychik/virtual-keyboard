@@ -1,39 +1,60 @@
-
+html{
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+}
 .input{
-  margin: 0 auto;
-  width: 90vw;
-  max-width: 900px;
-  height: 40px;
+  margin: 0 26%;
+  width: 593px;
+  height: 90px;
+
 }
 .main{
-  background-color: blue;
-  margin: 0 auto;
+  background-color: #00B25C;
+  margin: 20px 26%;
   width: 600px;
   height: 220px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  color:white;
+  border: #00B25C 10px solid;
+  border-radius: 20px;
+
 
 
 }
 .buttons{
   width: 35px;
   height: 35px;
-  background-color: #323746;
+  background-color: #36D88A;
   margin-left: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 2px;
+  transition-duration: 0.2s;
+
 
 }
-.little{
-  font-size: 10px;
-  position: relative;
-  top: -10px;
-  left: -1px;
+.buttons:hover{
+  width: 35px;
+  height: 35px;
+  background-color: 	#AEF26D;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.txt{
-  position: relative;
-  left: 0px;
-  bottom: 1px;
+.active{
+  background-color: #AEF26D;
+  border-radius: 15px;
+
+}
+@keyframes bord {
+  from{
+    border-radius: 2px;
+  }
+  to{
+    border-radius: 20px;
+  }
 }
