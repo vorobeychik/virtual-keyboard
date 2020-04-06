@@ -329,7 +329,7 @@ const keysEnCaps = [
 
 ];
 let language = 'Ru';
-if(localStorage.getItem('language') !== null){
+if(localStorage.getItem('language') !== 'null'){
 language = localStorage.getItem('language');}
 
 
@@ -502,7 +502,7 @@ MAIN.addEventListener("mouseout", event => {
 })
 MAIN.addEventListener("click", event => {
     MAIN.querySelectorAll('div').forEach(e =>{
-        if(event.target.attributes["data-code"].value === e.attributes["data-code"].value){
+        if(event.target.attributes["data-code"].value === e.attributes["data-code"].value || event.target.classList[0] !== 'main' ){
             if(e.textContent.length  <2){INPUT.value += e.textContent}
 
         }
