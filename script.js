@@ -338,9 +338,15 @@ document.body.onload = () =>{
    alert('Смена языка Ctrl + alt')
 };
 
-
+let caps = false;
 function LanguageCaps() {
+    console.log(caps)
+    if(caps === false){
     if(language === 'Ru'){keyBord(keysRuCaps)}else{keyBord(keysEnCaps)}
+    caps = true}else if(caps === true){
+        if(language === 'Ru'){keyBord(keysRu)}else{keyBord(keysEn)}
+        caps = false
+    }
 }
 const INPUT = document.createElement('textarea');
 const MAIN = document.createElement('div');
@@ -475,11 +481,14 @@ document.addEventListener('keydown',(event) =>{
             e.classList.add('active')
         }
     })
+    if(event.code === "CapsLock"){
+        LanguageCaps()
+    }
 });
 document.addEventListener('keydown',listener);
 document.addEventListener('keyup', function (event) {
     if(event.code === "ShiftLeft"){
-        if(language === 'Ru'){keyBord(keysRu)}else{keyBord(keysEn)}
+         LanguageCaps()
     }
 });
 INPUT.onfocus = () => {
@@ -501,18 +510,33 @@ MAIN.addEventListener("mouseout", event => {
 })
 MAIN.addEventListener("click", event => {
     MAIN.querySelectorAll('div').forEach(e =>{
-        if(event.target.attributes["data-code"].value === e.attributes["data-code"].value && event.target.classList[0] !== 'main' ){
+        if(event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === e.attributes["data-code"].value  ){
             if(e.textContent.length  <2){INPUT.value += e.textContent}
 
         }
     });
-    if(event.target.attributes["data-code"].value === "Backspace"){
+    if(event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "Backspace"){
         INPUT.value = INPUT.value.slice(0,INPUT.value.length - 1)
     }
-    if(event.target.attributes["data-code"].value === "Tab"){
+    if  (event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "Tab"){
         INPUT.value += '  '
     }
-    if(event.target.attributes["data-code"].value === "Enter"){
+    if( event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "Enter"){
         INPUT.value += '\n'
     }
 })
+MAIN.addEventListener('mousedown',event=>{
+    if(event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "ShiftLeft"){
+        LanguageCaps()
+    }
+
+    if(event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "CapsLock"){
+        LanguageCaps()
+    }
+})
+MAIN.addEventListener('mouseup',event=>{
+    if(event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "ShiftLeft"){
+        LanguageCaps()
+    }
+})
+
