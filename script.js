@@ -532,7 +532,9 @@ MAIN.addEventListener('mousedown',event=>{
     if(event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "ShiftLeft"){
         LanguageCaps()
     }
-
+    if(event.target.classList[0] !== 'main'){
+        event.target.classList.add('clicked')
+    }
     if(event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "CapsLock"){
         LanguageCaps()
     }
@@ -540,6 +542,9 @@ MAIN.addEventListener('mousedown',event=>{
 MAIN.addEventListener('mouseup',event=>{
     if(event.target.classList[0] !== 'main' && event.target.attributes["data-code"].value === "ShiftLeft"){
         LanguageCaps()
+    }
+    if(event.target.classList[0] !== 'main'){
+        event.target.classList.remove('clicked')
     }
 })
 

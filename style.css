@@ -41,3 +41,6 @@ html{
   background-color: #AEF26D;
   border-radius: 15px;
 }
+.clicked{
+  transform: scale(0.95,0.95);
+}
