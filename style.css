@@ -36,25 +36,8 @@ html{
 
 
 }
-.buttons:hover{
-  width: 35px;
-  height: 35px;
-  background-color: 	#AEF26D;
-  margin-left: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .active{
   background-color: #AEF26D;
   border-radius: 15px;
-
-}
-@keyframes bord {
-  from{
-    border-radius: 2px;
-  }
-  to{
-    border-radius: 20px;
-  }
 }

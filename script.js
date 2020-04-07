@@ -463,6 +463,9 @@ let listener = function (event) {
     if(event.code === "Backspace"){
         INPUT.value = INPUT.value.slice(0,INPUT.value.length - 1)
     }
+    if(event.code === "Enter"){
+        INPUT.value += '\n'
+    }
     MAIN.querySelectorAll('div').forEach(e =>{
         if(event.code === e.attributes["data-code"].value){
             e.classList.add('active')
