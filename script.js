@@ -487,7 +487,6 @@ INPUT.onfocus = () => {
 
 }
 INPUT.onblur = () => {
-    console.log(2)
     document.addEventListener('keydown',listener);
 }
 MAIN.addEventListener("mouseover", event => {
@@ -507,4 +506,7 @@ MAIN.addEventListener("click", event => {
 
         }
     });
+    if(event.target.attributes["data-code"].value === "Backspace"){
+        INPUT.value = INPUT.value.slice(0,INPUT.value.length - 1)
+    }
 })
